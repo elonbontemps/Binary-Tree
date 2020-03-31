@@ -1,0 +1,24 @@
+AddPlayer Luis 10
+PrintList
+AddPlayer Alfred 8
+PrintList
+AddPlayer Josh 8
+PrintList
+FindPlayer Luis
+RemovePlayer Luis
+FindPlayer Luis
+PrintList
+AddPlayer Jose 9
+AddPlayer Enrique 8
+AddPlayer Lio 5
+AddPlayer Harry 9
+AddPlayer Sergio 10
+AddPlayer Samuel 6
+AddPlayer Brad 10
+AddPlayer Ceci 9
+PrintList
+FindPlayer Lio
+AddPlayer Aech 11
+PrintList
+FindPlayer Lio
+Quit
