@@ -7,7 +7,7 @@
  * Date:      April 2, 2019
  */
 
-#include <string.h>
+#include <string>
 #include <iostream>
 #include "player.h"
 using namespace std;
