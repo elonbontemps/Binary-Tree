@@ -3,9 +3,9 @@
  * HW00: Sample homework using Hello World!
  *
  * File Name:  hello_world.cpp
- * Name:       ?
+ * Name:       Elon Bontemps
  * Course:     CPTR 242
- * Date:       ?
+ * Date:       April 3, 2020
  * Time Taken: ?
  *
  */
@@ -14,6 +14,6 @@
 using namespace std;
 
 int main() {
-    cout << "hello world!" << endl
+    cout << "Hello World!!!" << endl;
     return 0;
 }
