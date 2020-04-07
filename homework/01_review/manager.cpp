@@ -15,28 +15,48 @@ using namespace std;
 
 void Manager::addPlayer(int &numPlayers, Player *&players, string name, int score) {
     numPlayers++;
-    Player *newPlayers = nullptr;
-    newPlayers = new Player[numPlayers];
-    Player lowestPlayer;
-    if(numPlayers > 10){
-        int lowest = players[0].getScore();
-        for(int i = 1; i < numPlayers; i++){
-            if(players[i].getScore() < lowest){
-                lowestPlayer = players[i];
+    Player *addedPlayers = new Player[numPlayers];
+    Player bottomPlayer;
+    if (numPlayers > 10) {
+        int low = players[0].getScore();
+        for (int i = 1; i < numPlayers - 1; i++) {
+            if (players[i].getScore() < low) {
+                bottomPlayer = players[i];
             }
         }
     }
-    for(int i = 0; i < numPlayers; i++) {
-        if(players[i].getName() == lowestPlayer.getName()){
+    for (int i = 0; i < numPlayers - 1; i++) {
+        if (players[i].getName() == bottomPlayer.getName()) {
             continue;
         }
-        newPlayers[i] = players[i];
+        addedPlayers[i] = players[i];
     }
     Player *newPlayer = new Player(score, name);
-    newPlayers[numPlayers] = *newPlayer;
-    players = newPlayers;
+    addedPlayers[numPlayers - 1] = *newPlayer;
+    players = addedPlayers;
     return;
 }
 
+
 int Manager::searchPlayers(int numPlayers, Player *players, string target) {
+    for (int i = 0; i < numPlayers; i++) {
+        if (players[i].getName() == target) {
+            return players[i].getScore();
+        }
+    }
+    return -1;
+}
+
+void Manager::removePlayer(int &numPlayers, Player *&players, string target) {
+    Player *addedPlayers = new Player[numPlayers - 1];
+    for (int i = 0; i < numPlayers - 1; i++) {
+        if (players[i].getName() == target) {
+            continue;
+        }
+        addedPlayers[i] = players[i];
+    }
+    players = addedPlayers;
+    numPlayers--;
+    return;
+}
 
