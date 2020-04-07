@@ -48,15 +48,5 @@ int Manager::searchPlayers(int numPlayers, Player *players, string target) {
 }
 
 void Manager::removePlayer(int &numPlayers, Player *&players, string target) {
-    Player *addedPlayers = new Player[numPlayers - 1];
-    for (int i = 0; i < numPlayers - 1; i++) {
-        if (players[i].getName() == target) {
-            continue;
-        }
-        addedPlayers[i] = players[i];
-    }
-    players = addedPlayers;
-    numPlayers--;
-    return;
 }
 
