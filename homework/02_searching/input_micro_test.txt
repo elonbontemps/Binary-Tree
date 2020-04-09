@@ -1,0 +1,7 @@
+LoadListFromFile list_micro.txt
+PrintList
+LinearSearch 2
+BinarySearch 2
+LinearSearch 17
+BinarySearch 17
+Quit
