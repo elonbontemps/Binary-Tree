@@ -60,7 +60,7 @@ Each list implementation has a unique name: LinearSearch and BinarySearch.
 A simple way to compile them is to list the cpp after the g++ compiler.
 
 ```sh
-g++ -std=c++17 -o search.out SearchDriver.cpp LinearSearch.cpp BinarySearch.cpp
+g++ -std=c++17 -o search.out SearchDriver.cpp SearchTest.cpp LinearSearch.cpp BinarySearch.cpp ItemType.cpp
 ```
 
 Remember you only need to list the cpp files and must be in the local directory.
