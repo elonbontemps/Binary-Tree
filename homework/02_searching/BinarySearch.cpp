@@ -17,7 +17,7 @@ void BinarySearch::Search(std::vector<ItemType> list, ItemType key,
   int a = list.size() - 1;
   int b = 0;
   int c = 0;
-  Location = -1;
+  location = -1;
   comparisons = 0;
 
   while (a >= c) {
@@ -31,7 +31,7 @@ void BinarySearch::Search(std::vector<ItemType> list, ItemType key,
       c = b + 1;
       break;
     case EQUAL:
-      initLocation = b;
+      location = b;
       return;
     }
   }
