@@ -17,7 +17,7 @@ void LinearSearch::Search(std::vector<ItemType> list, ItemType key,
     location = -1;
 
     for (int i = 0; i < list.size(); ++i) {
-        ++initcomparisons;
+        ++comparisons;
         switch (key.ComparedTo(list.at(i))) {
             case LESS:
                 return;
