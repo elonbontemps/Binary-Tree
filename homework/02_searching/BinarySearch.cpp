@@ -10,5 +10,5 @@
 #include "BinarySearch.h"
 #include "ItemType.h"
 
-// TODO implement search
+//Functions
 
