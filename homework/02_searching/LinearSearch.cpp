@@ -11,4 +11,14 @@
 #include "LinearSearch.h"
 
 
+void LinearSearch::Search(std::vector<ItemType> list, ItemType key,
+                          int &location, int &comparisons) {
+    initcomparisons = 0;
+    initlocation = -1;
+
+}
+
+
+
+
 
