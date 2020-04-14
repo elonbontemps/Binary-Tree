@@ -31,8 +31,6 @@ void LinearSearch::Search(std::vector<ItemType> list, ItemType key,
 }
 
 
-}
-
 
 
 
