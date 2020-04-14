@@ -13,8 +13,8 @@
 
 void LinearSearch::Search(std::vector<ItemType> list, ItemType key,
                           int &location, int &comparisons) {
-    initcomparisons = 0;
-    initlocation = -1;
+    comparisons = 0;
+    location = -1;
 
     for (int i = 0; i < list.size(); ++i) {
         ++initcomparisons;
