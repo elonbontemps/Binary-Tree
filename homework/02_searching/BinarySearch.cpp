@@ -10,7 +10,7 @@
 #include "BinarySearch.h"
 #include "ItemType.h"
 
-//Function
+// Function
 void BinarySearch::Search(std::vector<ItemType> list, ItemType key,
                           int &location, int &comparisons) {
   // locates the size of list and splits it in half
@@ -22,7 +22,7 @@ void BinarySearch::Search(std::vector<ItemType> list, ItemType key,
 
   while (a >= c) {
     ++comparisons;
-    b = (a + 1) / 2;
+    b = (a + c) / 2;
     switch (key.ComparedTo(list.at(b))) {
     case LESS:
       a = b - 1;
@@ -36,4 +36,3 @@ void BinarySearch::Search(std::vector<ItemType> list, ItemType key,
     }
   }
 }
-
