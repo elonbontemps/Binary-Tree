@@ -32,4 +32,15 @@ void Sort(NodeType *list) {
   minPtr->next = NULL;
   minPtr->info = item;
 
-
+  if (min.ComparedTo(list->info) == LESS) {
+    ItemType temp = list->info;
+    list->info = minPtr->info;
+    minPtr->info = temp;
+  }
+  // removes mini pointer
+  if (list->next == NULL) {
+  return;
+  } else {
+    Sort(list->next);
+  }
+}
