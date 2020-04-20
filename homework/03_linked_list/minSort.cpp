@@ -23,8 +23,13 @@ NodeType *MinLoc(NodeType *list, NodeType *&minPtr) {
     return MinLoc(list->next, minPtr);
   }
 }
-
+//second recursive
 void Sort(NodeType *list) {
+  ItemType item;
+  ItemType min = MinLoc(list,minPtr)->info;
+  item.Initialize(9);
+  NodeType *minPtr = new NodeType;
+  minPtr->next = NULL;
+  minPtr->info = item;
 
 
-}
