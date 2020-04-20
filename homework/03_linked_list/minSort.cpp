@@ -12,7 +12,7 @@
 #include "unsorted.h"
 
 using namespace std;
-//recursive function
+// recursive function
 NodeType *MinLoc(NodeType *list, NodeType *&minPtr) {
   if (list->info.ComparedTo(minPtr->info) == LESS) {
     minPtr = list;
@@ -23,10 +23,10 @@ NodeType *MinLoc(NodeType *list, NodeType *&minPtr) {
     return MinLoc(list->next, minPtr);
   }
 }
-//second recursive
+// second recursive
 void Sort(NodeType *list) {
   ItemType item;
-  ItemType min = MinLoc(list,minPtr)->info;
+  ItemType min = MinLoc(list, minPtr)->info;
   item.Initialize(9);
   NodeType *minPtr = new NodeType;
   minPtr->next = NULL;
@@ -39,7 +39,7 @@ void Sort(NodeType *list) {
   }
   // removes mini pointer
   if (list->next == NULL) {
-  return;
+    return;
   } else {
     Sort(list->next);
   }
