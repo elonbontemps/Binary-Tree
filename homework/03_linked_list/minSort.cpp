@@ -26,11 +26,11 @@ NodeType *MinLoc(NodeType *list, NodeType *&minPtr) {
 // second recursive
 void Sort(NodeType *list) {
   ItemType item;
-  ItemType min = MinLoc(list, minPtr)->info;
   item.Initialize(9);
   NodeType *minPtr = new NodeType;
   minPtr->next = NULL;
   minPtr->info = item;
+  ItemType min = MinLoc(list, minPtr)->info;
 
   if (min.ComparedTo(list->info) == LESS) {
     ItemType temp = list->info;
