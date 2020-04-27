@@ -19,8 +19,8 @@ using namespace bridges;
 ImdbList::ImdbList() {
   // Class constructor
   length = 0;
-  listData = NULL;
   currentPos = NULL
+  listData = NULL;
 }
 
 ImdbList::~ImdbList() {
@@ -49,7 +49,6 @@ int ImdbList::GetLength() const {
 void ImdbList::MakeEmpty() {
   SLelement<string> *currNode = this->listData;
   SLelement<string> *nextNode;
-
   while (currNode->getNext() != NULL) {
     nextNode = currNode->getNext();
     free(currNode);
@@ -63,10 +62,10 @@ void ImdbList::MakeEmpty() {
 SLelement<string> *ImdbList::GetHead() { return listData; }
 
 void ImdbList::PutActor(string actor, string movies, int count) {
-  // TODO Add code here.
-
   // Create Element
   SLelement<string> *newNode = new SLelement<string>(actor, movies);
+
+
 
   // Creating visualization
   // Set size and color based on movies
@@ -99,7 +98,16 @@ void ImdbList::PutActor(string actor, string movies, int count) {
 }
 
 void ImdbList::GetActor(string actor, string &movies, bool &found) {
-  // TODO Add code here.
+  SLelement<string> *currNode = this->listData;
+  while (currNode->getNext() != NULL) {
+    if (currNode->getValue() == actor) {
+      found = true;
+      movies = currNode->getLabel();
+      return;
+    }
+    currNode = currNode->getNext();
+  }
+  found = false;
 }
 
 void ImdbList::DeleteActor(string actor) {
@@ -123,5 +131,13 @@ void ImdbList::ResetList() {
 }
 
 void ImdbList::GetNextActor(string &actor, string &movies) {
-
+  if (this->currentPos == NULL || this->currentPos->getNext() == NULL) {
+    this->currentPos = this->listData;
+    actor = this->currentPos->getValue();
+    movies = this->currentPos->getLabel();
+  } else {
+    this->currentPos = this->currentPos->getNext();
+    actor = this->currentPos->getValue();
+    movies = this->currentPos->getLabel();
+  }
 }
