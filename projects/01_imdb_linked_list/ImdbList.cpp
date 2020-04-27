@@ -53,6 +53,16 @@ SLelement<string> *ImdbList::GetHead() { return listData; }
 
 void ImdbList::PutActor(string actor, string movies, int count) {
   // TODO Add code here.
+
+  // Create Element
+  SLelement<string> *newNode = new SLelement<string>(actor, movies);
+
+  // Add the element to the list
+  newNode->setNext(listData);
+  listData = newNode;
+
+  // Update the length
+  length++;
 }
 
 void ImdbList::GetActor(string actor, string &movies, bool &found) {
