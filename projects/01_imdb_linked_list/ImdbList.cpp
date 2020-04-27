@@ -20,6 +20,7 @@ ImdbList::ImdbList() {
   // Class constructor
   length = 0;
   listData = NULL;
+  currentPos = NULL
 }
 
 ImdbList::~ImdbList() {
@@ -46,7 +47,17 @@ int ImdbList::GetLength() const {
 }
 
 void ImdbList::MakeEmpty() {
-  // TODO Add code here.
+  SLelement<string> *currNode = this->listData;
+  SLelement<string> *nextNode;
+
+  while (currNode->getNext() != NULL) {
+    nextNode = currNode->getNext();
+    free(currNode);
+    currNode = nextNode;
+  }
+  this->listData = NULL;
+  this->currentPos = NULL;
+  this->length = 0;
 }
 
 SLelement<string> *ImdbList::GetHead() { return listData; }
@@ -57,7 +68,29 @@ void ImdbList::PutActor(string actor, string movies, int count) {
   // Create Element
   SLelement<string> *newNode = new SLelement<string>(actor, movies);
 
-  // Add the element to the list
+  // Creating visualization
+  // Set size and color based on movies
+  string color = "";
+  double size = E;
+
+  if (count < 10) {
+    color = "green";
+    size = 10.0
+  } else if (count < 50) {
+    color = "yellow";
+    size = 20.0
+  } else if (count < 100) {
+    color = "orange";
+    size = 30.0
+  } else {
+    color = "red";
+    size = 40.0
+  }
+
+  newNode->setSize(size);
+  newNode->setColor(Color(color));
+}
+    // Add the element to the list
   newNode->setNext(listData);
   listData = newNode;
 
@@ -70,13 +103,25 @@ void ImdbList::GetActor(string actor, string &movies, bool &found) {
 }
 
 void ImdbList::DeleteActor(string actor) {
-  // TODO Add code here.
+  SLelement<string> *currNode = this->listData;
+  while (currNode->getNext() != NULL) {
+    if (currNode->getNext()->getValue() == actor) {
+      SLelement<string> *prevNode = currNode;
+      currNode = currNode->getNext();
+      SLelement<string> *nextNode = currNode->getNext();
+      free(currNode);
+      prevNode->setNext(nextNode);
+      return;
+    }
+    currNode = currNode->getNext();
+  }
+  this->length--;
 }
 
 void ImdbList::ResetList() {
-  // TODO Add code here.
+  currentPos = NULL; }
 }
 
 void ImdbList::GetNextActor(string &actor, string &movies) {
-  // TODO Add code here.
+
 }
