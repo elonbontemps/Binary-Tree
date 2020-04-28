@@ -22,7 +22,7 @@ private:
 public:
   BridgesUser() {
     BridgesNumber = 2421;
-    BridgesUserID = "";
+    BridgesUserID = "Bontel";
     BridgesAPIKey = "";
   }
   unsigned int getBridgesNumber() const { return BridgesNumber; }
