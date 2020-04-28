@@ -86,16 +86,16 @@ void ImdbList::PutActor(string actor, string movies, int count) {
   double size = E;
 
   if (count < 10) {
-    color = "green";
+    color = "blue";
     size = 10.0
   } else if (count < 50) {
-    color = "yellow";
+    color = "orange";
     size = 20.0
   } else if (count < 100) {
-    color = "orange";
+    color = "green";
     size = 30.0
   } else {
-    color = "red";
+    color = "purple";
     size = 40.0
   }
   newNode->setSize(size);
