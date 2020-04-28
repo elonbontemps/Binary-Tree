@@ -49,6 +49,7 @@ int ImdbList::GetLength() const {
 void ImdbList::MakeEmpty() {
   SLelement<string> *currNode = this->listData;
   SLelement<string> *nextNode;
+
   while (currNode->getNext() != NULL) {
     nextNode = currNode->getNext();
     free(currNode);
@@ -64,7 +65,6 @@ SLelement<string> *ImdbList::GetHead() { return listData; }
 void ImdbList::PutActor(string actor, string movies, int count) {
   // Create Element
   SLelement<string> *newNode = new SLelement<string>(actor, movies);
-
 
 
   // Creating visualization
