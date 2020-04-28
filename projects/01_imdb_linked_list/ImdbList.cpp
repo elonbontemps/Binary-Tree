@@ -107,7 +107,6 @@ void ImdbList::PutActor(string actor, string movies, int count) {
 
   // Update the length
   length++;
-}
 
 void ImdbList::GetActor(string actor, string &movies, bool &found) {
   SLelement<string> *currNode = this->listData;
