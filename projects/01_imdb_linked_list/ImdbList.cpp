@@ -3,9 +3,9 @@
  * Project 1: ImdbList implemented using linked list
  *
  * File Name: ImdbList.cpp
- * Name:      ??
+ * Name:      Elon Bontemps
  * Course:    CPTR 242
- * Date:      ??
+ * Date:      April 27, 2020
  *
  */
 #include "ImdbList.h"
@@ -19,7 +19,7 @@ using namespace bridges;
 ImdbList::ImdbList() {
   // Class constructor
   length = 0;
-  currentPos = NULL
+  currentPos = NULL;
   listData = NULL;
 }
 
@@ -80,33 +80,35 @@ void ImdbList::PutActor(string actor, string movies, int count) {
     newNode->setNext(currNode->getNext());
     currNode->setNext(newNode);
   }
+  this->length++;
+
   // Creating visualization
   // Set size and color based on movies
   string color = "";
-  double size = E;
+  double size = 0;
 
   if (count < 10) {
     color = "blue";
-    size = 10.0
+    size = 10.0;
   } else if (count < 50) {
     color = "orange";
-    size = 20.0
+    size = 20.0;
   } else if (count < 100) {
     color = "green";
-    size = 30.0
+    size = 30.0;
   } else {
     color = "purple";
-    size = 40.0
+    size = 40.0;
   }
   newNode->setSize(size);
   newNode->setColor(Color(color));
 }
-    // Add the element to the list
-  newNode->setNext(listData);
-  listData = newNode;
+//     // Add the element to the list
+//   newNode->setNext(listData);
+//   listData = newNode;
 
-  // Update the length
-  length++;
+//   // Update the length
+//   length++;
 
 void ImdbList::GetActor(string actor, string &movies, bool &found) {
   SLelement<string> *currNode = this->listData;
