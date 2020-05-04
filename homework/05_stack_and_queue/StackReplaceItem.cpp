@@ -5,7 +5,7 @@
  * File Name: ReplaceItemStack.cpp
  * Name:        Elon Bontemps
  * Course:      CPTR 242
- * Date:        May 4, 2020
+ * Date:        May the 4th be with you
  */
 #include "StackType.h"
 #include <iostream>

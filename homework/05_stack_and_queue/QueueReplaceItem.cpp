@@ -5,7 +5,7 @@
  * File Name: ReplaceItemQueue.cpp
  * Name:        Elon Bontemps
  * Course:      CPTR 242
- * Date:        May 4, 2020
+ * Date:        May 4th be with you
  */
 #include "QueueType.h"
 #include <cmath>
