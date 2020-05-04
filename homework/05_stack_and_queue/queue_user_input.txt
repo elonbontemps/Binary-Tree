@@ -1,0 +1,7 @@
+IsEmpty
+Print
+Enqueue B
+Print
+ReplaceItem B A
+Print
+Quit
