@@ -13,5 +13,20 @@ void StackType::ReplaceItem(ItemType oldItem, ItemType newItem) {
   if (this->IsEmpty()) {
     return;
   }
-  ItemType temp[MAX_ITEMS];
-  int tempTop = top;
+
+  StackType tempStack;
+  while (!this->IsEmpty()) {
+    ItemType item = this->Top();
+    this->Pop();
+    if (item == oldItem) {
+      item = newItem;
+    }
+    tempStack.Push(item);
+  }
+
+  while (!tempStack.IsEmpty()) {
+    ItemType item = tempStack.Top();
+    tempStack.Pop();
+    this->Push(item);
+  }
+}
