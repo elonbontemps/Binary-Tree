@@ -10,6 +10,17 @@ Note the file you are using has the extension __tpp__.
 This is because you are using a template and it must be include in the header file.
 To help designate they difference between implementation and template, the extension has been changed to `tpp`.
 
+## Setting Code.CS Preferences
+
+Code.CS has not been configure to format and code highlight the new template file.
+Please add the following lines to your preferences file.
+
+```json
+    "files.associations": {
+        "*.tpp": "cpp"
+    },
+```
+
 ## Solution Specifications
 
 Your solution to this problem must meet the following criteria.
