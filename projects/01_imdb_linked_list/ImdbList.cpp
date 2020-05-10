@@ -24,7 +24,7 @@ ImdbList::ImdbList() {
 }
 
 ImdbList::~ImdbList() {
-  // Post: List is empty; all items have been deallocated.
+  // Post: List s empty; all items have been deallocated.
   MakeEmpty();
 }
 
