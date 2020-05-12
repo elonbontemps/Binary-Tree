@@ -39,8 +39,4 @@ void HeapType<ItemType>::ReheapDownIterative(int root, int bottom) {
 }
 
 template <class ItemType>
-void HeapType<ItemType>::ReheapUpIterative(int root, int bottom) {
-
-}
-
-
+void HeapType<ItemType>::ReheapUpIterative(int root, int bottom) {}
