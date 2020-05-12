@@ -52,4 +52,3 @@ void HeapType<ItemType>::ReheapUpIterative(int root, int bottom) {
     }
   }
 }
-
