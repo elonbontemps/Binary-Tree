@@ -39,4 +39,17 @@ void HeapType<ItemType>::ReheapDownIterative(int root, int bottom) {
 }
 
 template <class ItemType>
-void HeapType<ItemType>::ReheapUpIterative(int root, int bottom) {}
+void HeapType<ItemType>::ReheapUpIterative(int root, int bottom) {
+  int parent;
+
+  for (int i = 0; i < numElements; i++) {
+    if (bottom > root) {
+      parent = (bottom - 1) / 2;
+      if (elements[parent] < elements[bottom]) {
+        Swap(elements[parent], elements[bottom]);
+        bottom = parent;
+      }
+    }
+  }
+}
+
