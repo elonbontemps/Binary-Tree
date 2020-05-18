@@ -13,7 +13,7 @@
 // IMPLEMENTATION FOR DeleteVertex HERE
 template <class VertexType>
 void GraphType<VertexType>::DeleteVertex(VertexType vertex1) {
-  //Deletion of Edges
+  // Deletion of vertex
   int index = IndexIs(vertex1);
   for (int i = 0; i < numVertices; i++) {
     if (edges[index][i]) {
