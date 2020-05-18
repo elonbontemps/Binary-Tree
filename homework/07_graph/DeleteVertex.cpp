@@ -3,7 +3,7 @@
  * Assignment: DeleteVertex
  *
  * File Name: DeleteVertex.cpp
- * Name:        ?
+ * Name:        Elon Bontemps
  * Course:      CPTR 242
  * Date:        ?
  */

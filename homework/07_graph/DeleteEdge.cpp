@@ -3,7 +3,7 @@
  * Assignment: DeleteEdge
  *
  * File Name: DeleteEdge.cpp
- * Name:        ?
+ * Name:        Elon Bontemps
  * Course:      CPTR 242
  * Date:        ?
  */
