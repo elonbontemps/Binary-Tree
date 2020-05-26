@@ -70,8 +70,5 @@ void ImdbGraph::ResetVisualizer() {
 }
 
 int ImdbGraph::GetBaconNumber(string sourceActor, string destinationActor) {
-  if (sourceActor == destinationActor) {
-    return 0;
-  }
   return -1;
 }
