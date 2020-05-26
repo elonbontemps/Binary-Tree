@@ -20,7 +20,6 @@ ImdbGraph::ImdbGraph() {}
 // Destructor
 ImdbGraph::~ImdbGraph() {}
 
-
 void ImdbGraph::AddVertex(string actorOrMovie) {
   auto vertices = graph.getVertices();
   if (vertices->find(actorOrMovie) == vertices->end()) {
@@ -40,20 +39,19 @@ void ImdbGraph::AddEdge(string actorOrMovie, string movieOrActor) {
   graph.getLinkVisualizer(movieOrActor, actorOrMovie)->setThickness(1.5);
 }
 
-
 void ImdbGraph::VisualizeVertex(string actorOrMovie, string color) {
   graph.getVisualizer(actorOrMovie)->setColor(Color(color));
   graph.getVisualizer(actorOrMovie)->setSize(50);
   graph.getVisualizer(actorOrMovie)->setOpacity(1.);
 }
 
-void ImdbGraph::VisualizeEdge(string actorOrMovie, string movieOrActor2, string color) {
+void ImdbGraph::VisualizeEdge(string actorOrMovie, string movieOrActor2,
+                              string color) {
   graph.getLinkVisualizer(actorOrMovie, movieOrActor2)->setColor(Color(color));
   graph.getLinkVisualizer(movieOrActor2, actorOrMovie)->setColor(Color(color));
   graph.getLinkVisualizer(actorOrMovie, movieOrActor2)->setThickness(8.);
   graph.getLinkVisualizer(movieOrActor2, actorOrMovie)->setThickness(8.);
 }
-
 
 void ImdbGraph::ResetVisualizer() {
   for (auto &vertex : *graph.getVertices()) {
@@ -71,11 +69,9 @@ void ImdbGraph::ResetVisualizer() {
   }
 }
 
-
 int ImdbGraph::GetBaconNumber(string sourceActor, string destinationActor) {
   if (sourceActor == destinationActor) {
     return 0;
   }
   return -1;
 }
-
