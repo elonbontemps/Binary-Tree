@@ -1,13 +1,3 @@
-/*************************************************************************
- *
- * Project: ImdbGraph implementation
- *
- * File Name: ImdbGraph.cpp
- * Name:      Elon Bontemps
- * Course:    CPTR 242
- * Date:      May 25, 2020
- *
- */
 #include <iostream>
 #include <queue>
 #include <string>
@@ -32,7 +22,7 @@ ImdbGraph::~ImdbGraph() {}
 
 
 void ImdbGraph::AddVertex(string actorOrMovie) {
-   auto vertices = graph.getVertices();
+  auto vertices = graph.getVertices();
   if (vertices->find(actorOrMovie) == vertices->end()) {
     graph.addVertex(actorOrMovie);
     graph.getVisualizer(actorOrMovie)->setColor(Color("blue"));
@@ -41,16 +31,11 @@ void ImdbGraph::AddVertex(string actorOrMovie) {
   }
 }
 
-}
-
-
 void ImdbGraph::AddEdge(string actorOrMovie, string movieOrActor) {
   graph.addEdge(actorOrMovie, movieOrActor, "1");
   graph.addEdge(movieOrActor, actorOrMovie, "1");
-  graph.getLinkVisualizer(actorOrMovie, movieOrActor)
-      ->setColor(Color("red"));
-  graph.getLinkVisualizer(movieOrActor, actorOrMovie)
-      ->setColor(Color("red"));
+  graph.getLinkVisualizer(actorOrMovie, movieOrActor)->setColor(Color("red"));
+  graph.getLinkVisualizer(movieOrActor, actorOrMovie)->setColor(Color("red"));
   graph.getLinkVisualizer(actorOrMovie, movieOrActor)->setThickness(1.5);
   graph.getLinkVisualizer(movieOrActor, actorOrMovie)->setThickness(1.5);
 }
@@ -58,13 +43,11 @@ void ImdbGraph::AddEdge(string actorOrMovie, string movieOrActor) {
 
 void ImdbGraph::VisualizeVertex(string actorOrMovie, string color) {
   graph.getVisualizer(actorOrMovie)->setColor(Color(color));
-  graph.getVisualizer(actorOrMovie)->setSize(45);
-  graph.getVisualizer(actorOrMovie)->setOpacity(2.);
+  graph.getVisualizer(actorOrMovie)->setSize(50);
+  graph.getVisualizer(actorOrMovie)->setOpacity(1.);
 }
 
-
-void ImdbGraph::VisualizeEdge(string actorOrMovie, string movieOrActor2,
-                              string color) {
+void ImdbGraph::VisualizeEdge(string actorOrMovie, string movieOrActor2, string color) {
   graph.getLinkVisualizer(actorOrMovie, movieOrActor2)->setColor(Color(color));
   graph.getLinkVisualizer(movieOrActor2, actorOrMovie)->setColor(Color(color));
   graph.getLinkVisualizer(actorOrMovie, movieOrActor2)->setThickness(8.);
