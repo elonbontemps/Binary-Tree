@@ -12,14 +12,14 @@
 
 void TreeType::AncestorsIterative(ItemType value, std::ofstream &outFile) {
   // Iterative Ancestors
-  TreeNode *tempTree = root;
-  while (tempTree->info != value) {
-    if (value < tempTree->info && tempTree->left != NULL) {
-      outFile << tempTree->info;
-      tempTree = tempTree->left;
-    } else if (value > tempTree->info && tempTree->right != NULL) {
-      outFile << tempTree->info;
-      tempTree = tempTree->right;
+  TreeNode *actTree = root;
+  while (actTree->info != value) {
+    if (value < actTree->info && actTree->left != NULL) {
+      outFile << actTree->info;
+      actTree = actTree->left;
+    } else if (value > actTree->info && actTree->right != NULL) {
+      outFile << actTree->info;
+      actTree = actTree->right;
     }
   }
 }
@@ -47,17 +47,17 @@ void PrintAncestorsReverse(TreeNode *tree, ItemType value,
   if (tree->info == value) {
     return;
   }
-  TreeNode *tempTree = tree;
-  ItemType prevValue;
-  while (tempTree->info != value) {
-    if (value < tempTree->info && tempTree->left != NULL) {
-      prevValue = tempTree->info;
-      tempTree = tempTree->left;
-    } else if (value > tempTree->info && tempTree->right != NULL) {
-      prevValue = tempTree->info;
-      tempTree = tempTree->right;
+  TreeNode *actTree = tree;
+  ItemType befValue;
+  while (actTree->info != value) {
+    if (value < actTree->info && actTree->left != NULL) {
+      befValue = actTree->info;
+      actTree = actTree->left;
+    } else if (value > actTree->info && actTree->right != NULL) {
+      befValue = actTree->info;
+      actTree = actTree->right;
     }
   }
-  outFile << prevValue;
-  PrintAncestorsReverse(tree, prevValue, outFile);
+  outFile << befValue;
+  PrintAncestorsReverse(tree, befValue, outFile);
 }
