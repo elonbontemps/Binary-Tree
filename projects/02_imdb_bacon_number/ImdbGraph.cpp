@@ -75,7 +75,6 @@ int ImdbGraph::GetBaconNumber(string sourceActor, string destinationActor) {
   map<string, string> parents;
   toCheck.push(sourceActor);
   int baconNumber = 0;
-  
   while (!toCheck.empty()) {
     string v = toCheck.front();
     toCheck.pop();
