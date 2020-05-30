@@ -70,5 +70,41 @@ void ImdbGraph::ResetVisualizer() {
 }
 
 int ImdbGraph::GetBaconNumber(string sourceActor, string destinationActor) {
+  bool found = false;
+  queue<string> toCheck;
+  map<string, string> parents;
+  toCheck.push(sourceActor);
+  int baconNumber = 0;
+  
+  while (!toCheck.empty()) {
+    string v = toCheck.front();
+    toCheck.pop();
+    if (v == destinationActor) {
+      found = true;
+      break;
+    }
+    auto adjList = graph.getAdjacencyList(v);
+    for (auto edge = adjList; edge != nullptr; edge = edge->getNext()) {
+      auto dest = edge->getValue().to();
+      if (parents.count(dest) == 0) {
+        parents.emplace(dest, v);
+        toCheck.push(dest);
+      }
+    }
+  }
+  if (found) {
+    string currParent = destinationActor;
+    VisualizeVertex(currParent, "orange");
+    while (currParent != sourceActor) {
+      string parent = parents.at(currParent);
+      LinkVisualizer *edge = graph.getLinkVisualizer(parent, currParent);
+      VisualizeEdge(parent, currParent, "orange");
+      VisualizeVertex(parent, "orange");
+      baconNumber++;
+      currParent = parent;
+    }
+    VisualizeVertex(sourceActor, "orange");
+    return baconNumber;
+  }
   return -1;
 }
