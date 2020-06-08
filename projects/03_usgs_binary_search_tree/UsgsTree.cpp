@@ -51,14 +51,13 @@ int UsgsTree::countRange(float min, float max,
   int count = countRange(min, max, root->getLeft(), color);
   if (min <= root->getKey() && root->getKey() <= max) {
     root->getVisualizer()->setColor(Color(color));
-    root->getVisualizer()->setSize(40);
+    root->getVisualizer()->setSize(30);
     count += 1;
   }
   count += countRange(min, max, root->getRight(), color);
 
   return count;
 }
-
 
 int UsgsTree::countByLocation(string location,
                               BSTElement<float, EarthquakeUSGS> *root,
@@ -70,7 +69,7 @@ int UsgsTree::countByLocation(string location,
   int count = countByLocation(location, root->getLeft(), color);
   if (root->getValue().getLocation().find(location) != -1) {
     root->getVisualizer()->setColor(Color(color));
-    root->getVisualizer()->setSize(40);
+    root->getVisualizer()->setSize(30);
     count += 1;
   }
   count += countByLocation(location, root->getRight(), color);
@@ -78,79 +77,44 @@ int UsgsTree::countByLocation(string location,
   return count;
 }
 
-
 int UsgsTree::countWithStyle(BSTElement<float, EarthquakeUSGS> *root,
                              string colorVertex, string colorEdge) {
-//   BSTElement<float, EarthquakeUSGS> *temp;
-//   std::queue<BSTElement<float, EarthquakeUSGS> *> rootQueue;
-//   std::set<BSTElement<float, EarthquakeUSGS> *> discoveredSet;
-
-  rootQueue.push(root);
-  discoveredSet.emplace(root);
-
-  while (!rootQueue.empty()) {
-    root = rootQueue.front();
-    rootQueue.pop();
-    temp = root;
-    while (temp->getLeft() != NULL) {
-      temp->setColor(Color(colorVertex));
-      temp->getLinkVisualizer(temp->getLeft())->setColor(Color(colorEdge));
-      temp = temp->getLeft();
-      if (temp->getRight() != NULL) {
-        rootQueue.push(temp);
-      }
-      if (discoveredSet.find(temp) == discoveredSet.end()) {
-        discoveredSet.emplace(temp);
-      }
-    }
-    temp->setColor(Color(colorVertex));
-    temp = root;
-    while (temp->getRight() != NULL) {
-      temp->setColor(Color(colorVertex));
-      temp->getLinkVisualizer(temp->getRight())->setColor(Color(colorEdge));
-      temp = temp->getRight();
-      if (temp->getLeft() != NULL) {
-        rootQueue.push(temp);
-      }
-      if (discoveredSet.find(temp) == discoveredSet.end()) {
-        discoveredSet.emplace(temp);
-      }
-    }
-    temp->setColor(Color(colorVertex));
+  if (root == NULL) {
+    return 0;
   }
 
-  return discoveredSet.size();
+  int count = countWithStyle(root->getLeft(), colorVertex, colorEdge);
+  root->getVisualizer()->setColor(Color(colorVertex));
+  vector<datastructure::TreeElement<dataset::EarthquakeUSGS> *,
+         allocator<datastructure::TreeElement<dataset::EarthquakeUSGS> *>>
+      &children = root->getChildren();
+  for (auto child : children) {
+    if (child != NULL) {
+      root->getLinkVisualizer(child)->setColor(Color(colorEdge));
+    }
+  }
+  count += 1;
+  count += countWithStyle(root->getRight(), colorVertex, colorEdge);
+
+  return count;
 }
 
-
 void UsgsTree::resetVisualization(BSTElement<float, EarthquakeUSGS> *root) {
-//   BSTElement<float, EarthquakeUSGS> *temp;
-  std::queue<BSTElement<float, EarthquakeUSGS> *> rootQueue;
-  std::set<BSTElement<float, EarthquakeUSGS> *> discoveredSet;
-  rootQueue.push(root);
-
-  while (!rootQueue.empty()) {
-    root = rootQueue.front();
-    rootQueue.pop();
-    temp = root;
-    while (temp->getLeft() != NULL) {
-      temp->setColor(Color("green"));
-      temp->getLinkVisualizer(temp->getLeft())->setColor(Color("green"));
-      temp = temp->getLeft();
-      if (temp->getRight() != NULL) {
-        rootQueue.push(temp);
-      }
-    }
-    temp->setColor(Color("green"));
-    temp = root;
-    while (temp->getRight() != NULL) {
-      temp->setColor(Color("green"));
-      temp->getLinkVisualizer(temp->getRight())->setColor(Color("green"));
-      temp = temp->getRight();
-      if (temp->getLeft() != NULL) {
-        rootQueue.push(temp);
-      }
-    }
-    temp->setColor(Color("green"));
+  if (root == NULL) {
+    return;
   }
+
+  resetVisualization(root->getLeft());
+  root->getVisualizer()->setColor(Color("green"));
+  root->getVisualizer()->setSize(5);
+  vector<datastructure::TreeElement<dataset::EarthquakeUSGS> *,
+         allocator<datastructure::TreeElement<dataset::EarthquakeUSGS> *>>
+      &children = root->getChildren();
+  for (auto child : children) {
+    if (child != NULL) {
+      root->getLinkVisualizer(child)->setColor(Color("green"));
+      root->getLinkVisualizer(child)->setThickness(1.);
+    }
+  }
+  resetVisualization(root->getRight());
 }
