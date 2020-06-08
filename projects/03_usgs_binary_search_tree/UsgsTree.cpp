@@ -89,7 +89,14 @@ int UsgsTree::countRange(float min, float max,
 int UsgsTree::countByLocation(string location,
                               BSTElement<float, EarthquakeUSGS> *root,
                               string color) {
-  return 0;
+  int count = countByLocation(location, root->getLeft(), color);
+  if (root->getValue().getLocation().find(location) != -1) {
+    root->getVisualizer()->setColor(Color(color));
+    root->getVisualizer()->setSize(40);
+    count += 1;
+  }
+  count += countByLocation(location, root->getRight(), color);
+  return count;
 }
 
 int UsgsTree::countWithStyle(BSTElement<float, EarthquakeUSGS> *root,
