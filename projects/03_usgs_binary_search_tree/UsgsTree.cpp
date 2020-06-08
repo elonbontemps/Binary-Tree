@@ -89,41 +89,89 @@ int UsgsTree::countRange(float min, float max,
 int UsgsTree::countByLocation(string location,
                               BSTElement<float, EarthquakeUSGS> *root,
                               string color) {
-  int count = countByLocation(location, root->getLeft(), color);
-  if (root->getValue().getLocation().find(location) != -1) {
-    root->getVisualizer()->setColor(Color(color));
-    root->getVisualizer()->setSize(40);
-    count += 1;
+  BSTElement<float, EarthquakeUSGS> *temp;
+  std::queue<BSTElement<float, EarthquakeUSGS> *> rootQueue;
+  std::set<BSTElement<float, EarthquakeUSGS> *> discoveredSet;
+
+  rootQueue.push(root);
+  discoveredSet.emplace(root);
+
+  while (!rootQueue.empty()) {
+    root = rootQueue.front();
+    rootQueue.pop();
+    temp = root;
+    while (temp->getLeft() != NULL) {
+      temp = temp->getLeft();
+      if (temp->getRight() != NULL) {
+        rootQueue.push(temp);
+      }
+      if (discoveredSet.find(temp) == discoveredSet.end()) {
+        discoveredSet.emplace(temp);
+      }
+    }
+    temp = root;
+    while (temp->getRight() != NULL) {
+      temp = temp->getRight();
+      if (temp->getLeft() != NULL) {
+        rootQueue.push(temp);
+      }
+      if (discoveredSet.find(temp) == discoveredSet.end()) {
+        discoveredSet.emplace(temp);
+      }
+    }
   }
-  count += countByLocation(location, root->getRight(), color);
+
+  int count = 0;
+  for (BSTElement<float, EarthquakeUSGS> *node : discoveredSet) {
+    if (node->getValue().getLocation().find(location) != std::string::npos) {
+      count++;
+      node->setColor(Color(color));
+    }
+  }
   return count;
 }
 
 int UsgsTree::countWithStyle(BSTElement<float, EarthquakeUSGS> *root,
                              string colorVertex, string colorEdge) {
-  int count = 0;
-  stack<BSTElement<float, EarthquakeUSGS> *> stack;
-  BSTElement<float, EarthquakeUSGS> *curNode = root;
+  BSTElement<float, EarthquakeUSGS> *temp;
+  std::queue<BSTElement<float, EarthquakeUSGS> *> rootQueue;
+  std::set<BSTElement<float, EarthquakeUSGS> *> discoveredSet;
 
-  while (!stack.empty() || curNode != nullptr) {
-    if (curNode != nullptr) {
-      stack.push(curNode);
-      curNode = curNode->getLeft();
-    } else {
-      curNode = stack.top();
-      stack.pop();
-      curNode->getVisualizer()->setColor(colorVertex);
-      if (curNode->getLeft() != NULL) {
-        curNode->getLinkVisualizer(curNode->getLeft())->setColor(colorEdge);
+  rootQueue.push(root);
+  discoveredSet.emplace(root);
+
+  while (!rootQueue.empty()) {
+    root = rootQueue.front();
+    rootQueue.pop();
+    temp = root;
+    while (temp->getLeft() != NULL) {
+      temp->setColor(Color(colorVertex));
+      temp->getLinkVisualizer(temp->getLeft())->setColor(Color(colorEdge));
+      temp = temp->getLeft();
+      if (temp->getRight() != NULL) {
+        rootQueue.push(temp);
       }
-      if (curNode->getRight() != NULL) {
-        curNode->getLinkVisualizer(curNode->getRight())->setColor(colorEdge);
+      if (discoveredSet.find(temp) == discoveredSet.end()) {
+        discoveredSet.emplace(temp);
       }
-      ++count;
-      curNode = curNode->getRight();
     }
+    temp->setColor(Color(colorVertex));
+    temp = root;
+    while (temp->getRight() != NULL) {
+      temp->setColor(Color(colorVertex));
+      temp->getLinkVisualizer(temp->getRight())->setColor(Color(colorEdge));
+      temp = temp->getRight();
+      if (temp->getLeft() != NULL) {
+        rootQueue.push(temp);
+      }
+      if (discoveredSet.find(temp) == discoveredSet.end()) {
+        discoveredSet.emplace(temp);
+      }
+    }
+    temp->setColor(Color(colorVertex));
   }
-  return count;
+
+  return discoveredSet.size();
 }
 
 void UsgsTree::resetVisualization(BSTElement<float, EarthquakeUSGS> *root) {
